@@ -61,6 +61,68 @@ document.getElementById('dudasForm').addEventListener('submit', async function(e
     }
 });
 
+// Page Index Navigation
+document.addEventListener('DOMContentLoaded', function() {
+    const pageIndex = document.getElementById('pageIndex');
+    const indexLinks = document.querySelectorAll('.index-link');
+    const sections = document.querySelectorAll('section[id]');
+    let lastScrollTop = 0;
+    const scrollThreshold = 200; // Mostrar índice después de 200px de scroll
+
+    // Mostrar/ocultar índice según el scroll
+    window.addEventListener('scroll', function() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (scrollTop > scrollThreshold) {
+            pageIndex.classList.add('visible');
+        } else {
+            pageIndex.classList.remove('visible');
+        }
+
+        // Actualizar enlace activo según la sección visible
+        let currentSection = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 150;
+            const sectionHeight = section.offsetHeight;
+            
+            if (scrollTop >= sectionTop && scrollTop < sectionTop + sectionHeight) {
+                currentSection = section.getAttribute('id');
+            }
+        });
+
+        // Actualizar clase activa en los enlaces
+        indexLinks.forEach(link => {
+            link.classList.remove('active');
+            const href = link.getAttribute('href');
+            if (href === `#${currentSection}`) {
+                link.classList.add('active');
+            }
+        });
+
+        lastScrollTop = scrollTop;
+    });
+
+    // Scroll suave al hacer clic en los enlaces
+    indexLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            
+            if (targetSection) {
+                const headerOffset = 80;
+                const elementPosition = targetSection.offsetTop;
+                const offsetPosition = elementPosition - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+});
+
 // Animación suave al hacer scroll con Intersection Observer mejorado
 document.addEventListener('DOMContentLoaded', function() {
     const observerOptions = {
