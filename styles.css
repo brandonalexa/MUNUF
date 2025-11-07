@@ -299,6 +299,28 @@ body {
     transition: transform 0.3s ease;
 }
 
+.location-link {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.location-link:hover {
+    color: var(--color-red);
+    transform: translateX(5px);
+}
+
+.location-link span {
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.location-link:hover span {
+    text-decoration: underline;
+}
+
 .info-item:hover svg {
     transform: scale(1.2);
 }
@@ -647,6 +669,153 @@ body {
     color: var(--color-white);
     margin: 0;
     text-align: center;
+}
+
+/* Permisos para Menores de Edad Section */
+.minors-permission-section {
+    padding: 100px 0;
+    background: var(--color-light-gray);
+    position: relative;
+    overflow: hidden;
+}
+
+.permission-content {
+    max-width: 900px;
+    margin: 0 auto;
+    animation: fadeInUp 1s ease-out;
+}
+
+.permission-category {
+    background: var(--color-white);
+    padding: 40px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    animation: fadeInUp 1s ease-out;
+}
+
+.permission-category:hover {
+    border-color: var(--color-red);
+    box-shadow: 0 8px 30px rgba(200, 16, 46, 0.15);
+    transform: translateY(-5px);
+}
+
+.permission-category-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--color-red);
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.permission-category-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-red), var(--color-gold));
+    border-radius: 2px;
+}
+
+.permission-intro {
+    font-size: 1.1rem;
+    color: var(--color-text-light);
+    margin-bottom: 25px;
+    font-style: italic;
+    padding: 15px;
+    background: rgba(200, 16, 46, 0.05);
+    border-left: 4px solid var(--color-red);
+    border-radius: 8px;
+}
+
+.permission-option {
+    margin-top: 30px;
+    padding: 25px;
+    background: var(--color-light-gray);
+    border-radius: 15px;
+    border-left: 4px solid var(--color-gold);
+}
+
+.permission-option-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--color-red);
+    margin-bottom: 15px;
+}
+
+.permission-option p {
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.permission-option strong {
+    color: var(--color-red);
+    font-weight: 600;
+}
+
+.permission-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.permission-list li {
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.8;
+    padding: 10px 0;
+    padding-left: 30px;
+    position: relative;
+}
+
+.permission-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--color-gold);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.permission-note {
+    background: linear-gradient(135deg, rgba(200, 16, 46, 0.1) 0%, rgba(212, 175, 55, 0.1) 100%);
+    padding: 30px;
+    border-radius: 15px;
+    border: 2px solid var(--color-gold);
+    margin-top: 40px;
+    animation: fadeInUp 1s ease-out;
+}
+
+.permission-note p {
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.permission-note strong {
+    color: var(--color-red);
+    font-weight: 600;
+}
+
+.email-link {
+    color: var(--color-red);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid transparent;
+}
+
+.email-link:hover {
+    color: var(--color-gold);
+    border-bottom-color: var(--color-gold);
 }
 
 /* Contact Section */
@@ -1304,6 +1473,20 @@ body {
     opacity: 0.9;
 }
 
+.footer-location-link {
+    text-decoration: none;
+    color: var(--color-white);
+    transition: all 0.3s ease;
+    border-bottom: 1px solid transparent;
+    opacity: 0.9;
+}
+
+.footer-location-link:hover {
+    color: var(--color-gold);
+    border-bottom-color: var(--color-gold);
+    opacity: 1;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .logo-container {
@@ -1339,6 +1522,18 @@ body {
 
     .section-title {
         font-size: 2rem;
+    }
+
+    .permission-category {
+        padding: 25px;
+    }
+
+    .permission-category-title {
+        font-size: 1.5rem;
+    }
+
+    .permission-option-title {
+        font-size: 1.2rem;
     }
 
     .commission-grid {
@@ -1385,6 +1580,30 @@ body {
 
     .section-title {
         font-size: 1.8rem;
+    }
+
+    .minors-permission-section {
+        padding: 60px 0;
+    }
+
+    .permission-category {
+        padding: 20px;
+    }
+
+    .permission-category-title {
+        font-size: 1.3rem;
+    }
+
+    .permission-option {
+        padding: 20px;
+    }
+
+    .permission-option-title {
+        font-size: 1.1rem;
+    }
+
+    .permission-note {
+        padding: 20px;
     }
 
     .category-title {

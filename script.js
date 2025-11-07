@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, observerOptions);
 
     // Observar elementos para animación
-    const animateElements = document.querySelectorAll('.commission-card, .contact-info, .dudas-form, .category-title, .responsibility-card, .what-is-card, .benefit-card, .rubric-item');
+    const animateElements = document.querySelectorAll('.commission-card, .contact-info, .dudas-form, .category-title, .responsibility-card, .what-is-card, .benefit-card, .rubric-item, .permission-category, .permission-option, .permission-note');
     animateElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
