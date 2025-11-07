@@ -1,36 +1,64 @@
-// Formulario de Dudas
-document.getElementById('dudasForm').addEventListener('submit', function(e) {
+// Formulario de Dudas con Formspree
+document.getElementById('dudasForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     
     const form = e.target;
     const formData = new FormData(form);
     const messageDiv = document.getElementById('form-message');
     const submitButton = form.querySelector('.submit-button');
+    const originalButtonText = submitButton.textContent;
     
-    // Animación del botón
+    // Animación del botón y deshabilitar
     submitButton.style.transform = 'scale(0.95)';
-    setTimeout(() => {
-        submitButton.style.transform = '';
-    }, 200);
+    submitButton.disabled = true;
+    submitButton.textContent = 'Enviando...';
     
-    // Simular envío del formulario
-    // En una implementación real, aquí se enviaría a un servidor
-    setTimeout(() => {
-        messageDiv.textContent = '¡Gracias por tu consulta! Nos pondremos en contacto contigo pronto.';
-        messageDiv.className = 'form-message success';
+    try {
+        const response = await fetch('https://formspree.io/f/xqagrqko', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+        
+        if (response.ok) {
+            messageDiv.textContent = '¡Gracias por tu consulta! Nos pondremos en contacto contigo pronto.';
+            messageDiv.className = 'form-message success';
+            messageDiv.style.animation = 'fadeInUp 0.5s ease-out';
+            messageDiv.style.display = 'block';
+            
+            // Limpiar el formulario
+            form.reset();
+            
+            // Ocultar el mensaje después de 5 segundos
+            setTimeout(() => {
+                messageDiv.style.animation = 'fadeIn 0.5s ease-out reverse';
+                setTimeout(() => {
+                    messageDiv.style.display = 'none';
+                }, 500);
+            }, 5000);
+        } else {
+            throw new Error('Error al enviar el formulario');
+        }
+    } catch (error) {
+        messageDiv.textContent = 'Hubo un error al enviar tu consulta. Por favor, intenta nuevamente o contáctanos por WhatsApp.';
+        messageDiv.className = 'form-message error';
         messageDiv.style.animation = 'fadeInUp 0.5s ease-out';
+        messageDiv.style.display = 'block';
         
-        // Limpiar el formulario
-        form.reset();
-        
-        // Ocultar el mensaje después de 5 segundos
         setTimeout(() => {
             messageDiv.style.animation = 'fadeIn 0.5s ease-out reverse';
             setTimeout(() => {
                 messageDiv.style.display = 'none';
             }, 500);
         }, 5000);
-    }, 500);
+    } finally {
+        // Restaurar botón
+        submitButton.disabled = false;
+        submitButton.textContent = originalButtonText;
+        submitButton.style.transform = '';
+    }
 });
 
 // Animación suave al hacer scroll con Intersection Observer mejorado
